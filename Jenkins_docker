@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage('Checkout'){
             steps{
-                branch: 'main' , url: 'https://github.com/fatimatabassum05/java-example'
+                git branch: 'main' , url: 'https://github.com/fatimatabassum05/java-example'
             }
         }
         stage('Build Docker Image'){
