@@ -1,0 +1,42 @@
+pipeline{
+    agent any
+    environment {
+      IMAGE_TAG = "${BUILD_NUMBER}"
+    }
+    stages{
+        stage('Checkout'){
+            steps{
+                branch: 'main' , url: 'https://github.com/fatimatabassum05/java-example'
+            }
+        }
+        stage('Build Docker Image'){
+            steps{
+                script{
+                  sh '''
+                  echo 'Build docker image'
+                  docker build -t fatimatabassum/jenkins-java-docker:${BUILD_NUMBER} .
+                }
+            }
+        }
+        stage('Push To DockerHub'){
+            environment {
+                DOCKER_IMAGE = "fatimatabassum/jenkins-java-docker:${BUILD_NUMBER}"
+                REGISTRY_CREDENTIALS = credentials('docker-cred')
+            }
+            steps{
+                script {
+                  def dockerImage = docker.image("${DOCKER_IMAGE}")
+                  docker.withRegistry('https://index.docker.io/v1/', "docker-cred"){
+                  dockerImage.push()
+                  }
+                }
+            }
+                
+        }
+        stage('Deploy the container'){
+            steps{
+                sh 'docker run -d -p 8080:8080 fatimatabassum/jenkins-java-docker'
+            }
+        }
+    }
+}
