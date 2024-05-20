@@ -32,7 +32,7 @@ pipeline{
         }
         stage('Deploy the container'){
             steps{
-                sh 'docker run -itd -p 8000:8080 fatimatabassum/jenkins-java-docker:${BUILD_NUMBER}'
+                sh 'docker run -itd --name Docker_container_${BUILD_NUMBER} -p 8000:8080 fatimatabassum/jenkins-java-docker:${BUILD_NUMBER}'
             }
         }
     }
