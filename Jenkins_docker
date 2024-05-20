@@ -25,7 +25,6 @@ pipeline{
             }
             steps{
                 script {
-                  sh 'docker login -u $(Docker_Cred_USR) -p $(Docker_Cred_PSW)'
                   sh 'docker push fatimatabassum/jenkins-java-docker:${BUILD_NUMBER}'
                 }
             }
