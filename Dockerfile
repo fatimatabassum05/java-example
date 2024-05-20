@@ -8,7 +8,7 @@ WORKDIR /java-example
 
 RUN mvn clean install
 
-FROM tomcat:9.0
+FROM tomcat:latest
 
 COPY --from=builder /java-example/target/*.war /usr/local/tomcat/webapps
 
