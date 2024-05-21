@@ -6,7 +6,7 @@ COPY . .
 
 RUN mvn clean install
 
-FROM tomcat:latest
+FROM artisantek/tomcat:1
 
 COPY --from=builder /app/target/*.war /usr/local/tomcat/webapps
 
