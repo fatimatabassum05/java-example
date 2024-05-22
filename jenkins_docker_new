@@ -20,8 +20,13 @@ pipeline{
             }
         }
         stage('Push to ECR'){
+            environment {
+                REGISTRY_CREDENTIALS = credentials('ecr-cred')
+            }
             steps{
-                
+                script {
+                  sh 'docker push 905418352029.dkr.ecr.ap-south-1.amazonaws.com/fatimatabassum:${BUILD_NUMBER}'
+                }
             }
         }
         stage('Deploy the container'){
