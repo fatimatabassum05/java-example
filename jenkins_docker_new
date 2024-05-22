@@ -2,6 +2,10 @@ pipeline{
     agent {label 'docker_node'}
     environment {
       IMAGE_TAG = "${BUILD_NUMBER}"
+      AWS_ACCOUNT_ID="905418352029"
+      AWS_DEFAULT_REGION="ap-south-1"
+      IMAGE_REPO_NAME="fatimatabassum"
+      REPOSITORY_URL="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
     }
     stages{
         stage('Checkout'){
@@ -14,7 +18,7 @@ pipeline{
                 script{
                   sh '''
                   echo 'Build docker image'
-                  docker build -t 905418352029.dkr.ecr.ap-south-1.amazonaws.com/fatimatabassum:${BUILD_NUMBER} .
+                  docker build -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${BUILD_NUMBER} .
                   '''
                 }
             }
@@ -25,14 +29,14 @@ pipeline{
             }
             steps{
                 script {
-                  sh 'aws ecr get-login-password --region ap-south-1| docker login --username AWS --password-stdin 905418352029.dkr.ecr.ap-south-1.amazonaws.com'
-                  sh 'docker push 905418352029.dkr.ecr.ap-south-1.amazonaws.com/fatimatabassum:${BUILD_NUMBER}'
+                  sh 'aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com'
+                  sh 'docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${BUILD_NUMBER}'
                 }
             }
         }
         stage('Deploy the container'){
             steps{
-                sh 'docker run -itd -p 9070:8080 905418352029.dkr.ecr.ap-south-1.amazonaws.com/fatimatabassum:${BUILD_NUMBER}'
+                sh 'docker run -itd -p 9070:8080 ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${BUILD_NUMBER}'
             }
         }
     }
