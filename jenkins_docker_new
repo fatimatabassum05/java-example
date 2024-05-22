@@ -14,7 +14,7 @@ pipeline{
                 script{
                   sh '''
                   echo 'Build docker image'
-                  docker build -t fatimatabassum/ubuntu:${BUILD_NUMBER} .
+                  docker build -t 905418352029.dkr.ecr.ap-south-1.amazonaws.com/fatimatabassum:${BUILD_NUMBER} .
                   '''
                 }
             }
