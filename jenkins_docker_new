@@ -1,5 +1,5 @@
 pipeline{
-    agent {label 'docker_node'}
+    agent {label 'docker_node_new'}
     environment {
       IMAGE_TAG = "${BUILD_NUMBER}"
       AWS_ACCOUNT_ID="905418352029"
