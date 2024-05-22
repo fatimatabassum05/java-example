@@ -21,7 +21,7 @@ pipeline{
         }
         stage('Deploy the container'){
             steps{
-                sh 'docker run -itd -p 8080:8080 fatimatabassum/ubuntu:${BUILD_NUMBER}'
+                sh 'docker run -itd -p 9000:8080 fatimatabassum/ubuntu:${BUILD_NUMBER}'
             }
         }
     }
