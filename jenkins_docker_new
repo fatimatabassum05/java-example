@@ -1,0 +1,27 @@
+pipeline{
+    agent {label 'docker_node'}
+    environment {
+      IMAGE_TAG = "${BUILD_NUMBER}"
+    }
+    stages{
+        stage('Checkout'){
+            steps{
+                git branch: 'main' , url: 'https://github.com/fatimatabassum05/java-example'
+            }
+        }
+        stage('Build Docker Image'){
+            steps{
+                script{
+                  sh '''
+                  echo 'Build docker image'
+                  docker build -t fatimatabassum/ubuntu:${BUILD_NUMBER} .
+                  '''
+                }
+            }
+        }
+        stage('Deploy the container'){
+            steps{
+                sh 'docker run -itd -p 8080:8080 fatimatabassum/ubuntu:${BUILD_NUMBER}'
+            }
+        }
+    }
