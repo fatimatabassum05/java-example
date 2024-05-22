@@ -19,6 +19,11 @@ pipeline{
                 }
             }
         }
+        stage('Push to ECR'){
+            steps{
+                
+            }
+        }
         stage('Deploy the container'){
             steps{
                 sh 'docker run -itd -p 9000:8080 fatimatabassum/ubuntu:${BUILD_NUMBER}'
