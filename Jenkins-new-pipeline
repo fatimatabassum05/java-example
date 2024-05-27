@@ -33,7 +33,7 @@ pipeline{
         }
         stage('Deploy the container'){
             steps{
-                sh 'docker run -itd ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${BUILD_NUMBER}'
+                sh 'docker run -itd -p 80:8080 ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${BUILD_NUMBER}'
             }
         }
     }
