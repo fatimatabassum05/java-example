@@ -25,14 +25,16 @@ pipeline{
             }
             steps{
                 script {
+                  docker.withRegistry('https://index.docker.io.v1/', "docker-cred") {
                   sh 'docker push fatimatabassum/jenkins-java-docker:${BUILD_NUMBER}'
+                  }
                 }
             }
                 
         }
         stage('Deploy the container'){
             steps{
-                sh 'docker run -itd -p 8090:8080 fatimatabassum/jenkins-java-docker:${BUILD_NUMBER}'
+                sh 'docker run -itd -p 90:8080 fatimatabassum/jenkins-java-docker:${BUILD_NUMBER}'
             }
         }
     }
