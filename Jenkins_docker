@@ -22,7 +22,7 @@ pipeline{
             }
             steps{
                 script {
-                  sh 'docker login -u ${REGISTRY_CREDENTIALS_USR} -p {REGISTRY_CREDENTIAL_PSW}'
+                  sh 'docker login -u ${REGISTRY_CREDENTIALS_USR} -p {REGISTRY_CREDENTIALS_PSW}'
                   sh 'docker push fatimatabassum/jenkins-java-docker:${BUILD_NUMBER}'
                 }
             }     
