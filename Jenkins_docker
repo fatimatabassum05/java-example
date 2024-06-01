@@ -18,13 +18,12 @@ pipeline{
         }
         stage('Push To DockerHub'){
             environment {
-                REGISTRY_CREDENTIALS = credentials('docker-cred')
+                REGISTRY_CREDENTIALS=credentials('docker-cred')
             }
             steps{
                 script {
-                  docker.withRegistry('https://index.docker.io.v1/', ${REGISTRY_CREDENTIALS}) {
-                    docker push fatimatabassum/jenkins-java-docker:${BUILD_NUMBER}
-                  }
+                  sh 'docker login -u ${REGISTRY_CREDENTIALS_USR} -p {REGISTRY_CREDENTIAL_PSW}'
+                  sh 'docker push fatimatabassum/jenkins-java-docker:${BUILD_NUMBER}'
                 }
             }     
         }
