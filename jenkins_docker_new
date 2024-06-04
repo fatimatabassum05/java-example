@@ -1,7 +1,6 @@
 pipeline{
     agent {label 'docker_node_new'}
     environment {
-      IMAGE_TAG = "${BUILD_NUMBER}"
       AWS_ACCOUNT_ID="905418352029"
       AWS_DEFAULT_REGION="ap-south-1"
       IMAGE_REPO_NAME="fatimatabassum"
