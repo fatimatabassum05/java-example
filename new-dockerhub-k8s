@@ -17,6 +17,7 @@ pipeline{
           }
         }
         stage('Push To DockerHub'){
+            agent {label 'docker_node_new'}
             environment {
                 DOCKER_CREDENTIALS=credentials('docker-cred')
             }
