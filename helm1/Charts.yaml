@@ -1,0 +1,9 @@
+apiVersion: v2
+name: webapp-project
+description: A Helm chart for Web Project
+
+type: application
+
+version: 0.1.0
+
+appVersion: "1"
