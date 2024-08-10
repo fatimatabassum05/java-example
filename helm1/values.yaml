@@ -1,1 +1,20 @@
+deployment:
+  name: webapp-project
+  replicaCount: 1
 
+image:
+  repository: 905418352029.dkr.ecr.ap-south-1.amazonaws.com/fatimatabassum
+  tag: IMAGE_NAME
+  containerPort: 8080
+
+service:
+  type: LoadBalancer
+  clusterIPPort: 8080
+
+ingress:
+  enabled: true
+  name: tomcat-deploy-project-ingress
+  host: ""  
+  path: /
+  backendServiceName: tomcat-deploy-project-svc
+  backendServicePort: 8080
