@@ -3,6 +3,11 @@ pipeline{
     environment{
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
+    options {
+      buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '7', numToKeepStr: '10')
+      retry(3)
+      timestamps
+    }
     stages{
          stage('Git Checkout Stage') {
             agent {label 'sonar_node'}
