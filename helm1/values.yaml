@@ -4,7 +4,7 @@ deployment:
 
 image:
   repository: 905418352029.dkr.ecr.ap-south-1.amazonaws.com/fatimatabassum
-  tag: IMAGE_NAME
+  tag: IMAGE_TAG
   containerPort: 8080
 
 service:
