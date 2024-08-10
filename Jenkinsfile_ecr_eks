@@ -6,7 +6,7 @@ pipeline{
     options {
       buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '7', numToKeepStr: '10')
       retry(3)
-      timestamps
+      timestamps()
     }
     stages{
          stage('Git Checkout Stage') {
