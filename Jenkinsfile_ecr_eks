@@ -5,7 +5,7 @@ pipeline{
     }
     stages{
          stage('Git Checkout Stage') {
-            agent {label 'docker'}
+            agent {label 'sonar_node'}
             steps{
                 git branch: 'main', url: 'https://github.com/fatimatabassum05/java-example.git'
             }
