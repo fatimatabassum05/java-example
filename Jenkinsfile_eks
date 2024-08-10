@@ -4,17 +4,17 @@ pipeline{
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
     stages{
-       stage('Git Checkout Stage'){
+       stage('Git Checkout Stage') {
             steps{
                 git branch: 'master', url: 'https://github.com/fatimatabassum05/java-example.git'
             }
          }        
-        stage('Build docker Image'){
+        stage('Build docker Image') {
           steps{
             sh 'docker build -t fatimatabassum/fatima12:IMAGE_TAG .'
           }
         }
-        stage('Push To Dockerhub'){
+        stage('Push To Dockerhub') {
           steps{
             sh 'docker push fatimatabassum/fatima12:IMAGE_TAG'
           }
