@@ -13,8 +13,8 @@ pipeline{
         stage('SonarQube Analysis Stage') {
             agent {label 'sonar_node'}
             steps{
-                withSonarQubeEnv('sonarqube') { 
-                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=sonarqube_1"
+                withSonarQubeEnv('sonar_new') { 
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=sonarqube_2"
                 }
             }
         }
