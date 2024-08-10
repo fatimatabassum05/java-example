@@ -13,8 +13,8 @@ service:
 
 ingress:
   enabled: true
-  name: tomcat-deploy-project-ingress
+  name: webapp-ingress
   host: ""  
   path: /
-  backendServiceName: tomcat-deploy-project-svc
+  backendServiceName: webapp-project-svc
   backendServicePort: 8080
