@@ -3,12 +3,6 @@ pipeline{
     environment{
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
-    options {
-      buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '7', numToKeepStr: '10')
-      retry(3)
-      timestamps()
-      throttleJobProperty categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 2, maxConcurrentTotal: 2, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project'
-    }
     stages{
          stage('Git Checkout Stage') {
             steps{
