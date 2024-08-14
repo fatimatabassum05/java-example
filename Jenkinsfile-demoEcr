@@ -1,1 +1,45 @@
-
+pipeline{
+    agent any
+    environment{
+        IMAGE_TAG = "${BUILD_NUMBER}"
+    }
+    options {
+      buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '7', numToKeepStr: '10')
+      retry(3)
+      timestamps()
+      throttleJobProperty categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 2, maxConcurrentTotal: 2, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project'
+    }
+    stages{
+         stage('Git Checkout Stage') {
+            steps{
+                git branch: 'main', url: 'https://github.com/fatimatabassum05/java-example.git'
+            }
+         }
+        stage('Build docker Image') {
+          steps{
+            sh 'docker build -t 905418352029.dkr.ecr.ap-south-1.amazonaws.com/fatimatabassum:IMAGE_TAG .'
+          }
+        }
+        stage('Push to ECR'){
+            steps{
+                withCredentials([aws(credentialsId: "awsCred", region: "ap-south-1")]) {
+                script {
+                 
+                  sh 'docker push 905418352029.dkr.ecr.ap-south-1.amazonaws.com/fatimatabassum:IMAGE_TAG'
+                    }
+                }
+            }
+        }
+    }
+        post {
+            always {
+                cleanWs()
+            }
+            success {
+                echo 'Pipeline completed successfully.'
+            }
+            failure {
+                echo 'Pipeline failed.'
+            }
+        }
+}
