@@ -11,7 +11,7 @@ pipeline{
          }
         stage('Build docker Image') {
           steps{
-            sh 'docker build -t 905418352029.dkr.ecr.ap-south-1.amazonaws.com/fatimatabassum:IMAGE_TAG .'
+            sh 'docker build -t 841162678640.dkr.ecr.ap-south-1.amazonaws.com/fatima/fatima:IMAGE_TAG .'
           }
         }
         stage('Push to ECR'){
@@ -19,7 +19,7 @@ pipeline{
                 withCredentials([aws(credentialsId: "awsCred", region: "ap-south-1")]) {
                 script {
                  
-                  sh 'docker push 905418352029.dkr.ecr.ap-south-1.amazonaws.com/fatimatabassum:IMAGE_TAG'
+                  sh 'docker push 841162678640.dkr.ecr.ap-south-1.amazonaws.com/fatima/fatima:IMAGE_TAG'
                     }
                 }
             }
