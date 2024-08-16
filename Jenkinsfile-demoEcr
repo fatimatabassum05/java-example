@@ -16,7 +16,7 @@ pipeline{
         }
         stage('Push to ECR'){
             steps{
-                withCredentials([aws(credentialsId: "ecrCred", region: "ap-south-1")]) {
+                AWS_REGISTRY_HOST=credentials('ecrCred') {
                 script {
                  
                   sh 'docker push 841162678640.dkr.ecr.ap-south-1.amazonaws.com/fatima/fatima:IMAGE_TAG'
