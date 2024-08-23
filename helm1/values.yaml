@@ -16,5 +16,3 @@ ingress:
   name: webapp-ingress
   host: ""  
   path: /
-  backendServiceName: webapp-project-svc
-  backendServicePort: 8080
