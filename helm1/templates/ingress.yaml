@@ -18,6 +18,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ .Values.ingress.backendServiceName }}
+                name: {{ .Values.ingress.name }}-svc
                 port:
-                  number: {{ .Values.ingress.backendServicePort }}
+                  number: {{ .Values.ingress.clusterIPPort }}
