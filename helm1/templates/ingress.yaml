@@ -3,13 +3,7 @@ kind: Ingress
 metadata:
   name: {{ .Values.ingress.name }}
   namespace: {{ .Values.namespace }}
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/target-port: '{{ .Values.service.clusterIPPort }}'
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
 spec:
-  ingressClassName: alb
   rules:
     - host: {{ .Values.ingress.host }}  
       http:
